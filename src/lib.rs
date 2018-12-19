@@ -986,8 +986,21 @@ impl<'a> Generator<'a> {
         self.test_sign(name, &c, ty);
     }
 
+    fn is_incomplete(&self, s: &ast::VariantData) -> bool {
+        for field in s.fields() {
+            let ty = self.ty2name(&field.ty, false);
+            if ty == "void" {
+                return true;
+            }
+        }
+        return false;
+    }
+
     fn test_struct(&mut self, ty: &str, s: &ast::VariantData) {
         if (self.opts.skip_struct)(ty) {
+            return;
+        }
+        if self.is_incomplete(s) {
             return;
         }
 

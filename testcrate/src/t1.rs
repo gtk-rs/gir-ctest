@@ -146,3 +146,12 @@ pub struct Pack {
     pub a: u8,
     pub b: u16,
 }
+
+#[repr(C)]
+pub struct Incomplete(c_void);
+
+#[repr(C)]
+pub struct Truncated {
+    pub a: u8,
+    pub b: c_void,
+}
