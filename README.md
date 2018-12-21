@@ -1,7 +1,11 @@
-# ctest
+# gir-ctest
 
-[![Build Status](https://travis-ci.org/alexcrichton/ctest.svg?branch=master)](https://travis-ci.org/alexcrichton/ctest)
-[![Build status](https://ci.appveyor.com/api/projects/status/akjf8gn5pem05iyw?svg=true)](https://ci.appveyor.com/project/alexcrichton/ctest)
+### Notice
+
+This is a modified version of ctest crate indended for use with code generated
+by [gir][gir].
+
+[gir]: https://github.com/gtk-rs/gir
 
 [Documentation][dox]
 
