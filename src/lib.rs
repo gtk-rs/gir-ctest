@@ -1240,7 +1240,16 @@ impl<'a> Generator<'a> {
             cty = cty
         ));
 
-        if rust_ty == "&str" {
+        if rust_ty == "&str" || rust_ty == "*const c_char" {
+            let value = if rust_ty == "&str" {
+                name.to_owned()
+            } else {
+                format!(
+                    r#"::std::ffi::CStr::from_ptr({name}).to_str().expect("const {name} not uf8")"#,
+                    name = name
+                )
+            };
+
             t!(writeln!(
                 self.rust,
                 r#"
@@ -1249,8 +1258,8 @@ impl<'a> Generator<'a> {
                     extern {{
                         fn __test_const_{name}() -> *const *const u8;
                     }}
-                    let val = {name};
                     unsafe {{
+                        let val = {value};
                         let ptr = *__test_const_{name}();
                         let c = ::std::ffi::CStr::from_ptr(ptr as *const _);
                         let c = c.to_str().expect("const {name} not utf8");
@@ -1258,7 +1267,8 @@ impl<'a> Generator<'a> {
                     }}
                 }}
             "#,
-                name = name
+                name = name,
+                value = value,
             ));
         } else {
             t!(writeln!(

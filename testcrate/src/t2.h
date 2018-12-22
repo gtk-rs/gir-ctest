@@ -21,3 +21,4 @@ static void T2a(void) {}
 
 #define T2C 4
 #define T2S "a"
+#define T2P "paddingA"

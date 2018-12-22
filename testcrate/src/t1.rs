@@ -4,6 +4,7 @@ use libc::*;
 
 pub type T1Foo = i32;
 pub const T1S: &'static str = "foo";
+pub const T1P: *const c_char = b"bar\0" as *const u8 as *const c_char;
 
 pub const T1N: i32 = 5;
 

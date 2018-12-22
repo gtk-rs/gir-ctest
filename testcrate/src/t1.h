@@ -4,6 +4,7 @@ typedef int32_t T1Foo;
 
 #define T1N 5
 #define T1S "foo"
+#define T1P "bar"
 
 struct T1Bar {
   int32_t a;

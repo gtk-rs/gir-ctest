@@ -31,6 +31,8 @@ i! {
     pub const T2S: &'static str = "b";
 }
 
+pub const T2P: *const c_char = b"paddingZ\0" as *const u8 as *const c_char;
+
 extern "C" {
     pub fn T2a();
 }
